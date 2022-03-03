@@ -59,7 +59,7 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
     <div className="flex w-full justify-center">
       <div className="m-5 flex w-full flex-col gap-3">
         <div className="flex justify-between">
-          <span className="text-3xl font-bold text-slate-800">Chaster</span>
+          <span className="text-3xl font-bold text-slate-800"><span className='underline decoration-indigo-500 underline-offset-2'>Chaster</span></span>
           <SignOut auth={auth} />
         </div>
         <div className="flex w-full flex-col gap-3 pb-16">
