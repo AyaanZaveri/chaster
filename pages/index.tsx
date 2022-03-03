@@ -17,6 +17,8 @@ import {
 } from 'firebase/firestore'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import SignIn from '../components/SignIn'
+import ChatMessage from '../components/ChatMessage'
+import Chat from '../components/Chat'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAcszJXj9_CWP0Pn3O3RKg-vEBR_TBVFMo',
@@ -48,88 +50,12 @@ const Index = () => {
     <div>
       {user ? (
         <div>
-          <Chat user={user} />
+          <Chat user={user} db={db} auth={auth} />
         </div>
       ) : (
         <SignIn auth={auth} provider={provider} />
       )}
     </div>
-  )
-}
-
-const SignOut = () => {
-  return (
-    <div>
-      <button onClick={() => auth.signOut()}>Sign out</button>
-    </div>
-  )
-}
-
-const Chat = ({ user }: { user: any }) => {
-  const [input, setInput] = useState('')
-
-  const messagesRef = collection(db, 'messages')
-
-  const q = query(messagesRef, orderBy('createdAt'), limit(20))
-
-  const [messages] = useCollectionData(q, {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  })
-
-  console.log(messages)
-
-  const { uid, photoURL, displayName } = user
-
-  // console.log(q)
-
-  const sendMessage = async (e: any) => {
-    e.preventDefault()
-
-    await addDoc(messagesRef, {
-      text: input,
-      createdAt: serverTimestamp(),
-      uid,
-      photoURL,
-      displayName,
-    })
-
-    setInput('')
-  }
-
-  return (
-    <div>
-      {messages &&
-        messages.map((msg) => (
-          <ChatMessage key={msg.id} message={msg} user={user} />
-        ))}
-      <form onSubmit={sendMessage}>
-        <input
-          value={input}
-          type="text"
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  )
-}
-
-function ChatMessage({ message, user }: { message: any; user: any }) {
-  const { text, uid, photoURL } = message
-
-  const messageClass = uid === user.uid ? 'sent' : 'received'
-
-  return (
-    <>
-      <div className={`message ${messageClass}`}>
-        <img
-          src={
-            photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
-          }
-        />
-        <p>{text}</p>
-      </div>
-    </>
   )
 }
 
