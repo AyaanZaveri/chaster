@@ -48,8 +48,8 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   }
 
   return (
-    <div className=" flex w-full justify-center">
-      <div className="m-4 flex w-full flex-col gap-3">
+    <div className="flex w-full justify-center">
+      <div className="m-5 flex w-full flex-col gap-3">
         <div className="flex justify-between">
           <span className='text-3xl font-bold text-slate-800'>Chaster</span>
           <SignOut auth={auth} />
