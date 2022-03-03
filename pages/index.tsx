@@ -6,7 +6,9 @@ import {
   onAuthStateChanged,
   signInWithPopup,
 } from 'firebase/auth'
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs, limit, orderBy, onSnapshot } from "firebase/firestore";
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAcszJXj9_CWP0Pn3O3RKg-vEBR_TBVFMo',
@@ -66,6 +68,16 @@ const SignOut = () => {
 
 const Chat = () => {
   const messagesRef = collection(db, 'messages')
+
+  const q = query(messagesRef, orderBy('createdAt'), limit(10));
+
+  const [messages] = useCollectionData(q, { idField: 'id' });
+
+  // console.log(q)
+
+  return (
+    <div></div>
+  )
 }
 
 export default Index
