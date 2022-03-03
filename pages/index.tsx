@@ -16,6 +16,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import SignIn from '../components/SignIn'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAcszJXj9_CWP0Pn3O3RKg-vEBR_TBVFMo',
@@ -50,16 +51,8 @@ const Index = () => {
           <Chat user={user} />
         </div>
       ) : (
-        <SignIn />
+        <SignIn auth={auth} provider={provider} />
       )}
-    </div>
-  )
-}
-
-const SignIn = () => {
-  return (
-    <div>
-      <button onClick={() => signInWithPopup(auth, provider)}>Sign in</button>
     </div>
   )
 }
@@ -105,11 +98,38 @@ const Chat = ({ user }: { user: any }) => {
 
   return (
     <div>
+      {messages &&
+        messages.map((msg) => (
+          <ChatMessage key={msg.id} message={msg} user={user} />
+        ))}
       <form onSubmit={sendMessage}>
-        <input value={input} type="text" onChange={(e) => setInput(e.target.value)} />
+        <input
+          value={input}
+          type="text"
+          onChange={(e) => setInput(e.target.value)}
+        />
         <button type="submit">Send</button>
       </form>
     </div>
+  )
+}
+
+function ChatMessage({ message, user }: { message: any; user: any }) {
+  const { text, uid, photoURL } = message
+
+  const messageClass = uid === user.uid ? 'sent' : 'received'
+
+  return (
+    <>
+      <div className={`message ${messageClass}`}>
+        <img
+          src={
+            photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
+          }
+        />
+        <p>{text}</p>
+      </div>
+    </>
   )
 }
 
