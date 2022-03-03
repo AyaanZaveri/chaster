@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { initializeApp } from 'firebase/app'
 import {
   getAuth,
@@ -6,9 +6,16 @@ import {
   onAuthStateChanged,
   signInWithPopup,
 } from 'firebase/auth'
-import { getFirestore, collection, query, where, getDocs, limit, orderBy, onSnapshot } from "firebase/firestore";
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-
+import {
+  getFirestore,
+  collection,
+  query,
+  limit,
+  orderBy,
+  addDoc,
+  serverTimestamp,
+} from 'firebase/firestore'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAcszJXj9_CWP0Pn3O3RKg-vEBR_TBVFMo',
@@ -40,7 +47,7 @@ const Index = () => {
     <div>
       {user ? (
         <div>
-          <Chat />
+          <Chat user={user} />
           {JSON.stringify(user)}
         </div>
       ) : (
@@ -66,21 +73,42 @@ const SignOut = () => {
   )
 }
 
-const Chat = () => {
+const Chat = ({ user }: { user: any }) => {
+  const [input, setInput] = useState('')
+
   const messagesRef = collection(db, 'messages')
 
-  const q = query(messagesRef, orderBy('createdAt'), limit(10));
+  const q = query(messagesRef, orderBy('createdAt'), limit(20))
 
   const messages = useCollectionData(q, {
     snapshotListenOptions: { includeMetadataChanges: true },
-  });
+  })
 
   console.log(messages)
 
+  const { uid, photoURL, displayName } = user
+
   // console.log(q)
 
+  const sendMessage = async (e: any) => {
+    e.preventDefault()
+
+    await addDoc(messagesRef, {
+      text: input,
+      createdAt: new Date(),
+      uid,
+      photoURL,
+      displayName,
+    })
+  }
+
   return (
-    <div></div>
+    <div>
+      <form onSubmit={sendMessage}>
+        <input type="text" onChange={(e) => setInput(e.target.value)} />
+        <button type="submit">Send</button>
+      </form>
+    </div>
   )
 }
 
