@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
 import SignOut from './SignOut'
+import { IoMdSend } from 'react-icons/io'
 
 const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   const [input, setInput] = useState('')
@@ -47,31 +48,34 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   }
 
   return (
-    <div>
-      <SignOut auth={auth} />
-      <div className="flex flex-col gap-3">
-        {messages &&
-          messages.map((msg) => (
-            <ChatMessage key={msg.id} message={msg} user={user} />
-          ))}
-      </div>
-      <form onSubmit={sendMessage}>
-        <div className="flex w-96 flex-row gap-2">
-          <input
-            value={input}
-            type="text"
-            className="w-full rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-100"
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type a message..."
-          />
-          <button
-            className="w-2/12 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
-            type="submit"
-          >
-            Send
-          </button>
+    <div className='flex justify-center mt-3'>
+      <div className='flex flex-col selection:m-3 gap-3'>
+        <SignOut auth={auth} />
+        <div className="flex flex-col gap-3">
+          {messages &&
+            messages.map((msg) => (
+              <ChatMessage key={msg.id} message={msg} user={user} />
+            ))}
         </div>
-      </form>
+        <form onSubmit={sendMessage}>
+          <div className="mt-3 flex w-96 flex-row gap-2">
+            <input
+              value={input}
+              type="text"
+              className="w-full rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type a message..."
+            />
+            <button
+              className="inline-flex w-3/12 place-items-center rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+              type="submit"
+            >
+              Send
+              <IoMdSend className="ml-2 h-4 w-4" />
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
