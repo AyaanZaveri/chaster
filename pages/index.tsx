@@ -80,7 +80,7 @@ const Chat = ({ user }: { user: any }) => {
 
   const q = query(messagesRef, orderBy('createdAt'), limit(20))
 
-  const messages = useCollectionData(q, {
+  const [messages] = useCollectionData(q, {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
 
@@ -95,7 +95,7 @@ const Chat = ({ user }: { user: any }) => {
 
     await addDoc(messagesRef, {
       text: input,
-      createdAt: new Date(),
+      createdAt: serverTimestamp(),
       uid,
       photoURL,
       displayName,
