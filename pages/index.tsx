@@ -48,7 +48,6 @@ const Index = () => {
       {user ? (
         <div>
           <Chat user={user} />
-          {JSON.stringify(user)}
         </div>
       ) : (
         <SignIn />
@@ -100,12 +99,14 @@ const Chat = ({ user }: { user: any }) => {
       photoURL,
       displayName,
     })
+
+    setInput('')
   }
 
   return (
     <div>
       <form onSubmit={sendMessage}>
-        <input type="text" onChange={(e) => setInput(e.target.value)} />
+        <input value={input} type="text" onChange={(e) => setInput(e.target.value)} />
         <button type="submit">Send</button>
       </form>
     </div>
