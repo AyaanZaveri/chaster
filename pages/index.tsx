@@ -71,7 +71,11 @@ const Chat = () => {
 
   const q = query(messagesRef, orderBy('createdAt'), limit(10));
 
-  const [messages] = useCollectionData(q, { idField: 'id' });
+  const messages = useCollectionData(q, {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
+
+  console.log(messages)
 
   // console.log(q)
 
