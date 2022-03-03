@@ -48,17 +48,17 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   }
 
   return (
-    <div className='flex justify-center mt-3'>
-      <div className='flex flex-col selection:m-3 gap-3'>
+    <div className="mt-3 flex w-full justify-center">
+      <div className="m-3 flex w-full flex-col gap-3">
         <SignOut auth={auth} />
-        <div className="flex flex-col gap-3">
+        <div className="flex w-min flex-col gap-3">
           {messages &&
             messages.map((msg) => (
               <ChatMessage key={msg.id} message={msg} user={user} />
             ))}
         </div>
         <form onSubmit={sendMessage}>
-          <div className="mt-3 flex w-96 flex-row gap-2">
+          <div className="mt-3 flex w-full flex-row gap-3">
             <input
               value={input}
               type="text"
@@ -67,7 +67,7 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
               placeholder="Type a message..."
             />
             <button
-              className="inline-flex w-3/12 place-items-center rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+              className="inline-flex place-items-center rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
               type="submit"
             >
               Send
