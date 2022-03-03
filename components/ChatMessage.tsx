@@ -6,11 +6,11 @@ const ChatMessage = ({ message, user }: { message: any; user: any }) => {
 
   const checkUser = () => {
     return uid === user.uid
-      ? 'bg-blue-500 text-white'
+      ? 'bg-indigo-500 text-white'
       : 'bg-slate-100 text-slate-600'
   }
 
-  const getUnix = (sec:number) => {
+  const getUnix = (sec: number) => {
     return DateTime.fromSeconds(sec).toLocaleString(DateTime.DATETIME_MED)
   }
 
@@ -20,13 +20,15 @@ const ChatMessage = ({ message, user }: { message: any; user: any }) => {
         src={photoURL || 'https://picsum.photos/200'}
         className="mb-1 w-3 rounded-full transition-all delay-200 ease-linear hover:w-6"
       />
-      <div className='flex flex-row items-center gap-2'>
+      <div className="flex flex-row items-center gap-2">
         <div
-          className={`inline-flex items-center gap-2 overflow-hidden rounded-full border ${checkUser()} py-1 px-3 shadow-sm`}
+          className={`inline-flex items-center gap-2 overflow-hidden rounded-full border hover:rotate-3 ${checkUser()} py-1 px-3 shadow-sm transition-all delay-200 ease-linear`}
         >
           <p>{text}</p>
         </div>
-        <p className='text-slate-400'>{createdAt ? getUnix(createdAt.seconds) : null}</p>
+        <p className="text-sm text-slate-400">
+          @ {createdAt ? getUnix(createdAt.seconds) : null}
+        </p>
       </div>
     </div>
   )
