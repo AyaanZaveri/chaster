@@ -51,7 +51,7 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
     <div className="mt-3 flex w-full justify-center">
       <div className="m-3 flex w-full flex-col gap-3">
         <SignOut auth={auth} />
-        <div className="flex w-min flex-col gap-3">
+        <div className="flex w-full flex-col gap-3">
           {messages &&
             messages.map((msg) => (
               <ChatMessage key={msg.id} message={msg} user={user} />

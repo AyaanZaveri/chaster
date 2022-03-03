@@ -11,6 +11,10 @@ const ChatMessage = ({ message, user }: { message: any; user: any }) => {
 
   return (
     <div className='flex flex-row items-start justify-start'>
+      <img
+        src={photoURL || 'https://picsum.photos/200'}
+        className="w-3 rounded-full"
+      />
       <div
         className={`inline-flex items-center gap-2 overflow-hidden rounded-full border ${checkUser()} py-1 px-3 shadow-sm`}
       >
