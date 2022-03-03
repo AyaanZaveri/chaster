@@ -1,20 +1,17 @@
 import React from 'react'
 
 const ChatMessage = ({ message, user }: { message: any; user: any }) => {
-    const { text, uid, photoURL } = message
-  
-    return (
-        <>
-        <div>
-          <img
-            src={
-              photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
-            }
-          />
-          <p>{text}</p>
-        </div>
-      </>
-    )
-  }
+  const { text, uid, photoURL } = message
+
+  return (
+    <div className="inline-flex">
+      <img
+        src={photoURL || 'https://picsum.photos/200'}
+        className="w-8 rounded-full"
+      />
+      <p>{text}</p>
+    </div>
+  )
+}
 
 export default ChatMessage
