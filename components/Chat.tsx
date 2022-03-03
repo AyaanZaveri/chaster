@@ -6,7 +6,7 @@ import {
   query,
   serverTimestamp,
 } from 'firebase/firestore'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
 import SignOut from './SignOut'
@@ -14,6 +14,8 @@ import { IoMdSend } from 'react-icons/io'
 
 const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   const [input, setInput] = useState('')
+
+  const dummy = useRef<null | HTMLDivElement>(null)
 
   const messagesRef = collection(db, 'messages')
 
@@ -31,6 +33,10 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
 
   // console.log(q)
 
+  useEffect(() => {
+    dummy.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
   const sendMessage = async (e: any) => {
     e.preventDefault()
 
@@ -44,6 +50,8 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
       })
 
       setInput('')
+
+      dummy.current?.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
@@ -51,17 +59,18 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
     <div className="flex w-full justify-center">
       <div className="m-5 flex w-full flex-col gap-3">
         <div className="flex justify-between">
-          <span className='text-3xl font-bold text-slate-800'>Chaster</span>
+          <span className="text-3xl font-bold text-slate-800">Chaster</span>
           <SignOut auth={auth} />
         </div>
-        <div className="flex w-full flex-col gap-3">
+        <div className="flex w-full flex-col gap-3 pb-16">
           {messages &&
             messages.map((msg) => (
               <ChatMessage key={msg.id} message={msg} user={user} />
             ))}
+          <span ref={dummy}></span>
         </div>
         <form onSubmit={sendMessage}>
-          <div className="absolute bottom-0 left-0 flex w-full flex-row gap-3 bg-white border-t border-slate-200 bg-opacity-50 p-5 backdrop-blur">
+          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur">
             <input
               value={input}
               type="text"
