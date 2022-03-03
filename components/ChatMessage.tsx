@@ -6,8 +6,8 @@ const ChatMessage = ({ message, user }: { message: any; user: any }) => {
 
   const checkUser = () => {
     return uid === user.uid
-      ? 'bg-indigo-500 text-white'
-      : 'bg-slate-100 text-slate-600'
+      ? 'bg-indigo-500 text-white border-indigo-200'
+      : 'bg-slate-100 text-slate-600 border-slate-200'
   }
 
   const getUnix = (sec: number) => {

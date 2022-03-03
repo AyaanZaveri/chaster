@@ -48,9 +48,12 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   }
 
   return (
-    <div className="mt-3 flex w-full h-screen justify-center">
-      <div className="m-3 flex w-full h-screen flex-col gap-3 justify-space-between">
-        <SignOut auth={auth} />
+    <div className=" flex w-full justify-center">
+      <div className="m-4 flex w-full flex-col gap-3">
+        <div className="flex justify-between">
+          <span className='text-3xl font-bold text-slate-800'>Chaster</span>
+          <SignOut auth={auth} />
+        </div>
         <div className="flex w-full flex-col gap-3">
           {messages &&
             messages.map((msg) => (
@@ -58,7 +61,7 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
             ))}
         </div>
         <form onSubmit={sendMessage}>
-          <div className="mt-3 flex w-full flex-row gap-3">
+          <div className="absolute bottom-0 left-0 flex w-full flex-row gap-3 bg-white border-t border-slate-200 bg-opacity-50 p-5 backdrop-blur">
             <input
               value={input}
               type="text"

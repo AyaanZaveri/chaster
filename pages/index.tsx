@@ -35,6 +35,8 @@ const auth = getAuth(firebaseApp)
 const provider = new GoogleAuthProvider()
 const db = getFirestore(firebaseApp)
 
+
+
 const Index = () => {
   const [user, setUser] = useState<any>(null)
 
