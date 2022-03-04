@@ -6,7 +6,7 @@ const ChatMessage = ({ message, user }: { message: any; user: any }) => {
 
   const checkUser = () => {
     return uid === user.uid
-      ? 'bg-indigo-500 text-white border-indigo-200'
+      ? 'bg-gradient-to-br from-indigo-500 to-violet-500 text-white border-indigo-200'
       : 'bg-slate-100 text-slate-600 border-slate-200'
   }
 
