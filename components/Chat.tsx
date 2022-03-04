@@ -15,7 +15,15 @@ import { IoMdSend } from 'react-icons/io'
 const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   const [input, setInput] = useState('')
 
+  console.log(user)
+
   const dummy = useRef<null | HTMLDivElement>(null)
+
+  const scrollToBottom = () => {
+    if (dummy.current) {
+      dummy.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   const messagesRef = collection(db, 'messages')
 
@@ -29,12 +37,18 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
 
   console.log(messages)
 
+  setInterval(() => {
+    if (document.body.scrollTop < 0) {
+      console.log('LA')
+    }
+  })
+
   const { uid, photoURL, displayName } = user
 
   // console.log(q)
 
   useEffect(() => {
-    dummy.current?.scrollIntoView({ behavior: 'smooth' })
+    scrollToBottom()
   }, [messages])
 
   const sendMessage = async (e: any) => {
@@ -51,7 +65,7 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
 
       setInput('')
 
-      dummy.current?.scrollIntoView({ behavior: 'smooth' })
+      scrollToBottom()
     }
   }
 
