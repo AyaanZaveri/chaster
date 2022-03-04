@@ -1,9 +1,28 @@
 import { signOut } from 'firebase/auth'
+import {
+  addDoc,
+  collection,
+  getDoc,
+  query,
+  serverTimestamp,
+  where,
+} from 'firebase/firestore'
 import React from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { HiOutlinePlus } from 'react-icons/hi'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
+import { useCollection } from 'react-firebase-hooks/firestore'
 
-const Sidebar = ({ user }: any) => {
+const Sidebar = ({ userInfo }: any) => {
+  const [user] = useAuthState(auth)
+
+  const chatRef = collection(db, 'chats')
+
+  const userChatRef = query(
+    chatRef,
+    where('users', 'array-contains', user?.email)
+  )
+
   const addChat = () => {
     const input = prompt(
       'Enter an email you would like to chat with.'
@@ -11,6 +30,18 @@ const Sidebar = ({ user }: any) => {
 
     if (!input) {
       return
+    }
+
+    if (input === userInfo.email) {
+      alert('You can not chat with yourself.')
+      return
+    } else {
+      const chatCollection = collection(db, 'chats')
+
+      addDoc(chatCollection, {
+        users: [user?.uid, input],
+        createdAt: serverTimestamp(),
+      })
     }
   }
 
@@ -21,7 +52,7 @@ const Sidebar = ({ user }: any) => {
           <div className="inline-flex items-center gap-2">
             <img
               onClick={() => signOut(auth)}
-              src={user.photoURL}
+              src={userInfo.photoURL}
               className="h-8 w-8 rounded-full shadow hover:cursor-pointer"
               alt=""
             />
@@ -33,7 +64,10 @@ const Sidebar = ({ user }: any) => {
           </div>
         </div>
         <div className="grid place-items-center">
-          <button className="inline-flex w-10/12 items-center justify-center gap-1 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100">
+          <button
+            onClick={addChat}
+            className="inline-flex w-10/12 items-center justify-center gap-1 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+          >
             Add Chat <HiOutlinePlus className="h-4 w-4" />
           </button>
         </div>
