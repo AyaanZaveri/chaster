@@ -69,7 +69,7 @@ const Messages = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   }
 
   return (
-    <div className="ml-72 flex w-full justify-center">
+    <div className="ml-80 flex w-full justify-center">
       <div className="flex w-full flex-col gap-3">
         <div className="flex w-full flex-col gap-3 pb-16">
           <div className="m-5 flex flex-col gap-3">
