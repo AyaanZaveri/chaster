@@ -1,8 +1,15 @@
 import React from 'react'
+import { db } from '../firebase'
 
 const Sidebar = () => {
+  const createChat = () => {
+    db.collection('chats').add({
+      users: [user.email, input],
+    })
+  }
+
   return (
-    <div className="flex h-screen flex-col border-r pl-6 w-72">
+    <div className="flex h-screen w-72 flex-col border-r pl-6">
       <div className="mt-5 flex flex-col gap-5">
         <div>
           <span className="text-3xl font-bold text-slate-800">

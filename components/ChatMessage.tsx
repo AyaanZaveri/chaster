@@ -15,7 +15,7 @@ const ChatMessage = ({ message, user }: { message: any; user: any }) => {
   }
 
   return (
-    <div className="flex flex-row items-end justify-start gap-1">
+    <div className={`flex flex-row items-end ${uid === user.uid ? "justify-end" : "justify-start"} gap-1`}>
       <img
         src={photoURL || 'https://picsum.photos/200'}
         className="mb-1 w-3 rounded-full transition-all delay-200 ease-linear hover:w-6"

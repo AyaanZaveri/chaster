@@ -20,21 +20,7 @@ import SignIn from '../components/SignIn'
 import ChatMessage from '../components/ChatMessage'
 import Chat from '../components/Chat'
 import Sidebar from '../components/Sidebar'
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyAcszJXj9_CWP0Pn3O3RKg-vEBR_TBVFMo',
-  authDomain: 'chat-8e45c.firebaseapp.com',
-  projectId: 'chat-8e45c',
-  storageBucket: 'chat-8e45c.appspot.com',
-  messagingSenderId: '477251945871',
-  appId: '1:477251945871:web:46833cbb9634dc379677fa',
-  measurementId: 'G-D6R2RPLMCC',
-}
-
-const firebaseApp = initializeApp(firebaseConfig)
-const auth = getAuth(firebaseApp)
-const provider = new GoogleAuthProvider()
-const db = getFirestore(firebaseApp)
+import { auth, db, provider } from '../firebase'
 
 const Index = () => {
   const [user, setUser] = useState<any>(null)
