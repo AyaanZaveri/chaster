@@ -70,14 +70,16 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   }
 
   return (
-    <div className="flex w-full justify-center ml-72">
-      <div className="m-5 flex w-full flex-col gap-3">
+    <div className="ml-72 flex w-full justify-center">
+      <div className="flex w-full flex-col gap-3">
         <div className="flex w-full flex-col gap-3 pb-16">
-          {messages &&
-            messages.map((msg) => (
-              <ChatMessage key={msg.id} message={msg} user={user} />
-            ))}
-          <span ref={dummy}></span>
+          <div className="m-5 flex flex-col gap-3">
+            {messages &&
+              messages.map((msg) => (
+                <ChatMessage key={msg.id} message={msg} user={user} />
+              ))}
+            <span ref={dummy}></span>
+          </div>
         </div>
         <form onSubmit={sendMessage}>
           <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">

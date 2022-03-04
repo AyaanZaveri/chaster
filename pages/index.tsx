@@ -16,11 +16,11 @@ import {
   serverTimestamp,
 } from 'firebase/firestore'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import SignIn from '../components/SignIn'
 import ChatMessage from '../components/ChatMessage'
 import Chat from '../components/Chat'
 import Sidebar from '../components/Sidebar'
 import { auth, db, provider } from '../firebase'
+import Login from './Login'
 
 const Index = () => {
   const [user, setUser] = useState<any>(null)
@@ -45,7 +45,7 @@ const Index = () => {
           </div>
         </div>
       ) : (
-        <SignIn auth={auth} provider={provider} />
+        <Login />
       )}
     </div>
   )

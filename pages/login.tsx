@@ -1,8 +1,9 @@
 import { signInWithPopup } from 'firebase/auth'
 import React from 'react'
-import GoogleLogo from './GoogleLogo'
+import GoogleLogo from '../components/GoogleLogo'
+import { auth, provider } from '../firebase'
 
-const SignIn = ({ auth, provider }: any) => {
+const Login = () => {
   return (
     <div className="grid h-screen place-items-center">
       <button
@@ -16,4 +17,4 @@ const SignIn = ({ auth, provider }: any) => {
   )
 }
 
-export default SignIn
+export default Login
