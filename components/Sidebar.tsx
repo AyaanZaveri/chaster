@@ -44,12 +44,12 @@ const Sidebar = ({ userInfo }: any) => {
       return
     }
 
-    if (input === userInfo.email && !checkChatExists(input)) {
-      alert('You can not chat with yourself.')
-    } else {
+    if (input !== userInfo.email && !checkChatExists(input)) {
       addDoc(chatRef, {
         users: [user?.email, input],
       })
+    } else {
+      alert('Chat already exists.')
     }
   }
 

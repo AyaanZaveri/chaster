@@ -17,7 +17,7 @@ import {
 } from 'firebase/firestore'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from '../components/ChatMessage'
-import Chat from '../components/Chat'
+import Messages from '../components/Messages'
 import Sidebar from '../components/Sidebar'
 import { auth, db, provider } from '../firebase'
 import Login from './Login'
@@ -41,12 +41,10 @@ const Index = () => {
             <div className="fixed">
               <Sidebar userInfo={user} />
             </div>
-            <Chat user={user} db={db} auth={auth} />
+            <Messages user={user} db={db} auth={auth} />
           </div>
         </div>
-      ) : (
-        null
-      )}
+      ) : null}
     </div>
   )
 }
