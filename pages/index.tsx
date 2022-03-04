@@ -20,7 +20,7 @@ import ChatMessage from '../components/ChatMessage'
 import Messages from '../components/Messages'
 import Sidebar from '../components/Sidebar'
 import { auth, db, provider } from '../firebase'
-import Login from './Login'
+import Login from './login'
 
 const Index = () => {
   const [user, setUser] = useState<any>(null)
