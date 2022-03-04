@@ -10,12 +10,12 @@ import { collection, doc, serverTimestamp, setDoc } from 'firebase/firestore'
 function MyApp({ Component, pageProps }: AppProps) {
   const [user, loading] = useAuthState(auth)
 
-  const userCollection = collection(db, 'users')
+  const userRef = collection(db, 'users')
 
   useEffect(() => {
     if (user) {
       setDoc(
-        doc(userCollection, user.uid),
+        doc(userRef, user.uid),
         {
           displayName: user.displayName,
           photoURL: user.photoURL,

@@ -29,10 +29,10 @@ const Sidebar = ({ userInfo }: any) => {
 
   console.log(chatsSnapshot)
 
-  const checkChatExists = async (chatId: string) =>
+  const checkChatExists = async (chatEmail: string) =>
     !!chatsSnapshot?.docs.find(
       (chat) =>
-        chat.data().users.find((user: any) => user === chatId)?.length > 0
+        chat.data().users.find((user: any) => user === chatEmail)?.length > 0
     )
 
   const addChat = () => {
@@ -46,11 +46,8 @@ const Sidebar = ({ userInfo }: any) => {
 
     if (input === userInfo.email && !checkChatExists(input)) {
       alert('You can not chat with yourself.')
-      return
     } else {
-      const chatCollection = collection(db, 'chats')
-
-      addDoc(chatCollection, {
+      addDoc(chatRef, {
         users: [user?.email, input],
       })
     }
