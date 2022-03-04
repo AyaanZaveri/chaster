@@ -16,12 +16,24 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 const Sidebar = ({ userInfo }: any) => {
   const [user] = useAuthState(auth)
 
+  console.log(user)
+
   const chatRef = collection(db, 'chats')
 
   const userChatRef = query(
     chatRef,
     where('users', 'array-contains', user?.email)
   )
+
+  const [chatsSnapshot] = useCollection(userChatRef)
+
+  console.log(chatsSnapshot)
+
+  const checkChatExists = async (chatId: string) =>
+    !!chatsSnapshot?.docs.find(
+      (chat) =>
+        chat.data().users.find((user: any) => user === chatId)?.length > 0
+    )
 
   const addChat = () => {
     const input = prompt(
@@ -32,15 +44,14 @@ const Sidebar = ({ userInfo }: any) => {
       return
     }
 
-    if (input === userInfo.email) {
+    if (input === userInfo.email && !checkChatExists(input)) {
       alert('You can not chat with yourself.')
       return
     } else {
       const chatCollection = collection(db, 'chats')
 
       addDoc(chatCollection, {
-        users: [user?.uid, input],
-        createdAt: serverTimestamp(),
+        users: [user?.email, input],
       })
     }
   }
