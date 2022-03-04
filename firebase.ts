@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app'
+import { initializeApp, getApps } from 'firebase/app'
 import {
   getAuth,
   GoogleAuthProvider,
@@ -25,13 +25,11 @@ const firebaseConfig = {
   measurementId: 'G-D6R2RPLMCC',
 }
 
-const firebaseApp = initializeApp(firebaseConfig)
+const firebaseApp = !getApps().length
+  ? initializeApp(firebaseConfig)
+  : getApps()[0]
 const auth = getAuth(firebaseApp)
 const provider = new GoogleAuthProvider()
 const db = getFirestore(firebaseApp)
 
-export {
-    auth,
-    provider,
-    db
-}
+export { auth, provider, db }
