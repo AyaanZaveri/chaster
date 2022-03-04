@@ -22,12 +22,12 @@ const ChatMessage = ({ message, user }: { message: any; user: any }) => {
       />
       <div className="flex flex-row items-center gap-2">
         <div
-          className={`inline-flex items-center gap-2 overflow-hidden rounded-2xl border hover:rotate-3 ${checkUser()} py-1 px-3 shadow-sm transition-all delay-200 ease-linear`}
+          className={`inline-flex items-center gap-2 overflow-hidden rounded-2xl border hover:rotate-1 ${checkUser()} py-1 px-3 shadow-sm transition-all delay-200 ease-linear`}
         >
           <p>{text}</p>
         </div>
         <p className="text-sm text-slate-400">
-          @ {createdAt ? getUnix(createdAt.seconds) : null}
+          {/* @ {createdAt ? getUnix(createdAt.seconds) : null} */}
         </p>
       </div>
     </div>
