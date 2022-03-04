@@ -9,7 +9,6 @@ import {
 import React, { useEffect, useRef, useState } from 'react'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
-import SignOut from './SignOut'
 import { IoMdSend } from 'react-icons/io'
 
 const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {

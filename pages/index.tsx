@@ -39,13 +39,13 @@ const Index = () => {
         <div>
           <div className="flex flex-row">
             <div className="fixed">
-              <Sidebar />
+              <Sidebar user={user} />
             </div>
             <Chat user={user} db={db} auth={auth} />
           </div>
         </div>
       ) : (
-        <Login />
+        null
       )}
     </div>
   )
