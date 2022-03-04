@@ -57,7 +57,7 @@ const Sidebar = ({ userInfo }: any) => {
   return (
     <div>
       <div className="flex h-screen w-72 flex-col gap-3 border-r">
-        <div className="mt-5 flex flex-col gap-5  pl-6">
+        <div className="mt-5 flex flex-col gap-5 pl-6">
           <div className="inline-flex items-center gap-2">
             <img
               onClick={() => signOut(auth)}
@@ -80,10 +80,12 @@ const Sidebar = ({ userInfo }: any) => {
             Add Chat <HiOutlinePlus className="h-4 w-4" />
           </button>
         </div>
-        <div>
-          {chatsSnapshot?.docs.map((chat) => (
-            <Chat />
-          ))}
+        <div className="flex justify-center">
+          <div className="flex w-10/12 flex-col gap-3">
+            {chatsSnapshot?.docs.map((chat) => (
+              <Chat id={chat.id} user={chat.data().users} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
