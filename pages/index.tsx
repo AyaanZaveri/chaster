@@ -38,12 +38,10 @@ const Index = () => {
       {user ? (
         <div>
           <div className="flex flex-row">
-            {/* <div className="fixed">
+            <div className="fixed">
               <Sidebar />
-            </div> */}
-            {/* <div className='ml-72'> */}
-              <Chat user={user} db={db} auth={auth} />
-            {/* </div> */}
+            </div>
+            <Chat user={user} db={db} auth={auth} />
           </div>
         </div>
       ) : (

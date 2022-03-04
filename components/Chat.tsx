@@ -70,7 +70,7 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   }
 
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full justify-center ml-72">
       <div className="m-5 flex w-full flex-col gap-3">
         <div className="flex w-full flex-col gap-3 pb-16">
           {messages &&
