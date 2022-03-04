@@ -19,6 +19,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import SignIn from '../components/SignIn'
 import ChatMessage from '../components/ChatMessage'
 import Chat from '../components/Chat'
+import Sidebar from '../components/Sidebar'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAcszJXj9_CWP0Pn3O3RKg-vEBR_TBVFMo',
@@ -35,8 +36,6 @@ const auth = getAuth(firebaseApp)
 const provider = new GoogleAuthProvider()
 const db = getFirestore(firebaseApp)
 
-
-
 const Index = () => {
   const [user, setUser] = useState<any>(null)
 
@@ -52,7 +51,14 @@ const Index = () => {
     <div>
       {user ? (
         <div>
-          <Chat user={user} db={db} auth={auth} />
+          <div className="flex flex-row">
+            <div className="fixed">
+              <Sidebar />
+            </div>
+            <div className='ml-72'>
+              <Chat user={user} db={db} auth={auth} />
+            </div>
+          </div>
         </div>
       ) : (
         <SignIn auth={auth} provider={provider} />
