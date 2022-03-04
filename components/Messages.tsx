@@ -11,7 +11,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
 import { IoMdSend } from 'react-icons/io'
 
-const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
+const Messages = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   const [input, setInput] = useState('')
 
   console.log(user)
@@ -103,4 +103,4 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
   )
 }
 
-export default Chat
+export default Messages

@@ -12,6 +12,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { HiOutlinePlus } from 'react-icons/hi'
 import { auth, db } from '../firebase'
 import { useCollection } from 'react-firebase-hooks/firestore'
+import Chat from './Chat'
 
 const Sidebar = ({ userInfo }: any) => {
   const [user] = useAuthState(auth)
@@ -29,7 +30,7 @@ const Sidebar = ({ userInfo }: any) => {
 
   console.log(chatsSnapshot)
 
-  const checkChatExists = async (chatEmail: string) =>
+  const checkChatExists = (chatEmail: string) =>
     !!chatsSnapshot?.docs.find(
       (chat) =>
         chat.data().users.find((user: any) => user === chatEmail)?.length > 0
@@ -48,10 +49,10 @@ const Sidebar = ({ userInfo }: any) => {
       addDoc(chatRef, {
         users: [user?.email, input],
       })
-    } else {
-      alert('Chat already exists.')
     }
   }
+
+  console.log(chatsSnapshot?.docs.map((chat) => chat.data().users))
 
   return (
     <div>
@@ -78,6 +79,11 @@ const Sidebar = ({ userInfo }: any) => {
           >
             Add Chat <HiOutlinePlus className="h-4 w-4" />
           </button>
+        </div>
+        <div>
+          {chatsSnapshot?.docs.map((chat) => (
+            <Chat />
+          ))}
         </div>
       </div>
     </div>
