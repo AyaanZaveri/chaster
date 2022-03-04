@@ -15,12 +15,20 @@ const ChatMessage = ({ message, user }: { message: any; user: any }) => {
   }
 
   return (
-    <div className={`flex flex-row items-end ${uid === user.uid ? "justify-end" : "justify-start"} gap-1`}>
-      <img
+    <div
+      className={`grid grid-flow-col ${
+        uid === user.uid ? 'place-items-end' : 'place-items-start'
+      } gap-1`}
+    >
+      {/* <img
         src={photoURL || 'https://picsum.photos/200'}
         className="mb-1 w-3 rounded-full transition-all delay-200 ease-linear hover:w-6"
-      />
-      <div className="flex flex-row items-center gap-2">
+      /> */}
+      <div
+        className={`grid ${
+          uid === user.uid ? 'place-items-end' : 'place-items-start'
+        } w-1/2 items-center`}
+      >
         <div
           className={`inline-flex items-center gap-2 overflow-hidden rounded-2xl border hover:rotate-1 ${checkUser()} py-1 px-3 shadow-sm transition-all delay-200 ease-linear`}
         >

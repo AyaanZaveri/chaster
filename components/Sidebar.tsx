@@ -1,12 +1,6 @@
 import React from 'react'
-import { db } from '../firebase'
 
 const Sidebar = () => {
-  const createChat = () => {
-    db.collection('chats').add({
-      users: [user.email, input],
-    })
-  }
 
   return (
     <div className="flex h-screen w-72 flex-col border-r pl-6">
