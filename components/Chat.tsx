@@ -70,7 +70,7 @@ const Chat = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
           <span ref={dummy}></span>
         </div>
         <form onSubmit={sendMessage}>
-          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur">
+          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
             <input
               value={input}
               type="text"
