@@ -1,9 +1,9 @@
 import React from 'react'
 
-const [id] = () => {
+const ChatIndex = () => {
   return (
-    <div>[id]</div>
+    <div>ChatIndex</div>
   )
 }
 
-export default [id]
+export default ChatIndex
