@@ -34,7 +34,10 @@ const Chat = ({ id, users }: ChatProps) => {
   return (
     <div>
       <div>
-        <button onClick={() => enterChat()} className="inline-flex w-full items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-5 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100">
+        <button
+          onClick={() => enterChat()}
+          className="inline-flex w-full items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-5 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600"
+        >
           {recipient?.photoURL ? (
             <img
               className="w-8 rounded-full shadow-sm"

@@ -52,7 +52,7 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="flex h-screen w-screen md:w-80 flex-col gap-5 border-r bg-white dark:bg-slate-800 dark:border-slate-600">
+      <div className="flex h-screen w-screen flex-col gap-5 border-r bg-white dark:border-slate-600 dark:bg-slate-800 md:w-80">
         <div className="mt-5 flex flex-col gap-5 pl-6">
           <div className="inline-flex items-center gap-2">
             <img
@@ -71,7 +71,7 @@ const Sidebar = () => {
         <div className="grid place-items-center">
           <button
             onClick={addChat}
-            className="inline-flex w-10/12 items-center justify-center gap-1 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+            className="inline-flex w-10/12 items-center justify-center gap-1 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600"
           >
             Add Chat <HiOutlinePlus className="h-4 w-4" />
           </button>
