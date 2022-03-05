@@ -139,7 +139,7 @@ const Messages = ({ chat, messages }: any) => {
                 {getRecipientEmail(chat?.users, user)[0].toUpperCase()}
               </div>
             )}
-            <h1 className="text-lg font-bold text-slate-800 drop-shadow-md">
+            <h1 className="text-lg font-bold text-slate-800">
               {getRecipientEmail(chat?.users, user)}
             </h1>
           </div>
