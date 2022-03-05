@@ -19,6 +19,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../firebase'
 import getRecipientEmail from '../lib/getRecipientEmail'
 import { HiOutlineEmojiHappy } from 'react-icons/hi'
+import dynamic from 'next/dynamic';
+const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false });
 
 interface UserInfo {
   uid: string | null
@@ -28,6 +30,12 @@ interface UserInfo {
 
 const Messages = ({ chat, messages }: any) => {
   const [input, setInput] = useState('')
+  const [chosenEmoji, setChosenEmoji] = useState(null)
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+
+  const onEmojiClick = (event: any, emojiObject: any) => {
+    setChosenEmoji(emojiObject)
+  }
 
   const [user] = useAuthState(auth)
 
@@ -128,6 +136,9 @@ const Messages = ({ chat, messages }: any) => {
           </div>
         </div>
         <form onSubmit={handleSubmit}>
+          <div className={`absolute z-50 bottom-0 ml-5 mb-24`}>
+            <Picker onEmojiClick={onEmojiClick} />
+          </div>
           <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
             <button
               className="ml-80 inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
