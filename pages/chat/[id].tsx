@@ -27,7 +27,7 @@ const ChatIndex = ({ messages, chat }: { messages: string[]; chat: any }) => {
       </Head>
       <div>
         <div className="flex flex-row">
-          <div className="fixed z-20">
+          <div className="hidden md:block fixed z-20">
             <Sidebar />
           </div>
           <Messages chat={chat} messages={messages} />
