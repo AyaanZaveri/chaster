@@ -31,11 +31,14 @@ const Messages = ({ chat, messages }: any) => {
 
   const [user] = useAuthState(auth)
 
+  const router = useRouter()
+
   const [messagesSnapshot] = useCollection(
+    chat ?
     query(
       collection(doc(collection(db, 'chats'), chat.id), 'messages'),
       orderBy('createdAt', 'asc')
-    )
+    ) : null
   )
 
   const showMessages = () => {
@@ -56,10 +59,12 @@ const Messages = ({ chat, messages }: any) => {
   }
 
   const [recipientSnapshot] = useCollection(
+    chat ?
     query(
       collection(db, 'users'),
-      where('email', '==', getRecipientEmail(chat.users, user))
+      where('email', '==', getRecipientEmail(chat?.users, user))
     )
+    : null
   )
 
   const recipient = recipientSnapshot?.docs[0]?.data()
@@ -71,12 +76,14 @@ const Messages = ({ chat, messages }: any) => {
 
     if (!input) return null
 
-    addDoc(collection(doc(collection(db, 'chats'), chat.id), 'messages'), {
-      user: user?.email,
-      text: input,
-      createdAt: serverTimestamp(),
-      photoURL: user?.photoURL,
-    })
+    if (user && input) {
+      addDoc(collection(doc(collection(db, 'chats'), chat.id), 'messages'), {
+        user: user?.email,
+        text: input,
+        createdAt: serverTimestamp(),
+        photoURL: user?.photoURL,
+      })
+    }
 
     setInput('')
   }
@@ -106,11 +113,11 @@ const Messages = ({ chat, messages }: any) => {
               />
             ) : (
               <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-indigo-200 bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-sm">
-                {getRecipientEmail(chat.users, user)[0].toUpperCase()}
+                {getRecipientEmail(chat?.users, user)}
               </div>
             )}
             <h1 className="text-lg font-bold text-slate-800">
-              {getRecipientEmail(chat.users, user)}
+              {getRecipientEmail(chat?.users, user)}
             </h1>
           </div>
         </div>
