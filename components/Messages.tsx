@@ -125,7 +125,7 @@ const Messages = ({ chat, messages }: any) => {
   return (
     <div className="flex w-full justify-center md:ml-80">
       <div className="flex w-full flex-col gap-3">
-        <div className="fixed top-0 left-0 flex w-full flex-row gap-3 border-b border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-800">
+        <div className="fixed top-0 left-0 flex w-full flex-row gap-3 border-b border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur-sm dark:border-slate-600 dark:bg-slate-800">
           <div className="inline-flex items-center gap-2 md:ml-80">
             <a href="/">
               <HiChevronLeft className="h-7 w-7 text-indigo-500 md:hidden" />
@@ -146,7 +146,7 @@ const Messages = ({ chat, messages }: any) => {
             </h1>
           </div>
         </div>
-        <div className="mt-20 h-full w-full flex-col gap-3">
+        <div className="mt-[4.5rem] bg-white dark:bg-slate-800 h-full w-full flex-col gap-3">
           <div className="-z-20 m-5 flex flex-col gap-3 pb-24">
             {showMessages()}
             <span ref={dummy}></span>
@@ -160,9 +160,9 @@ const Messages = ({ chat, messages }: any) => {
           >
             <Picker onEmojiClick={onEmojiClick} />
           </div>
-          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-800">
+          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur-sm dark:border-slate-600 dark:bg-slate-800">
             <button
-              className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100 dark:border-slate-800 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600 md:ml-80"
+              className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600 md:ml-80"
               onClick={() => setShowEmojiPicker(!showEmojiPicker)}
               type="button"
             >
@@ -171,12 +171,12 @@ const Messages = ({ chat, messages }: any) => {
             <input
               value={input}
               type="text"
-              className="w-full rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100 dark:border-slate-800 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600"
+              className="w-full rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600"
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type a message..."
             />
             <button
-              className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100 dark:border-slate-800 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600"
+              className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600"
               type="submit"
             >
               Send
