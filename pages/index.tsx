@@ -32,7 +32,7 @@ const Index = () => {
       {user ? (
         <div>
           <div className="flex flex-row">
-            <div className="fixed">
+            <div className="fixed z-20">
               <Sidebar />
             </div>
             <Messages />

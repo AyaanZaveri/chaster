@@ -91,7 +91,7 @@ const Messages = () => {
           </div>
         </div>
         <form onSubmit={sendMessage}>
-          <div className="fixed bottom-0 left-0 -z-10 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
+          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
             <input
               value={input}
               type="text"
