@@ -113,7 +113,7 @@ const Messages = ({ chat, messages }: any) => {
               />
             ) : (
               <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-indigo-200 bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-sm">
-                {getRecipientEmail(chat?.users, user)}
+                {getRecipientEmail(chat?.users, user)[0].toUpperCase()}
               </div>
             )}
             <h1 className="text-lg font-bold text-slate-800">
