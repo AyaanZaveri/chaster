@@ -52,7 +52,7 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="flex h-screen w-screen md:w-80 flex-col gap-5 border-r bg-white">
+      <div className="flex h-screen w-screen md:w-80 flex-col gap-5 border-r bg-white dark:bg-slate-800 dark:border-slate-600">
         <div className="mt-5 flex flex-col gap-5 pl-6">
           <div className="inline-flex items-center gap-2">
             <img
@@ -61,7 +61,7 @@ const Sidebar = () => {
               className="h-8 w-8 rounded-full shadow hover:cursor-pointer"
               alt=""
             />
-            <span className="text-3xl font-bold text-slate-800">
+            <span className="text-3xl font-semibold text-slate-800 dark:text-white">
               <span className="underline decoration-indigo-500 underline-offset-2">
                 Chaster
               </span>
