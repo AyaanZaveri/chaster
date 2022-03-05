@@ -34,11 +34,12 @@ const Messages = ({ chat, messages }: any) => {
   const router = useRouter()
 
   const [messagesSnapshot] = useCollection(
-    chat ?
-    query(
-      collection(doc(collection(db, 'chats'), chat.id), 'messages'),
-      orderBy('createdAt', 'asc')
-    ) : null
+    chat
+      ? query(
+          collection(doc(collection(db, 'chats'), chat.id), 'messages'),
+          orderBy('createdAt', 'asc')
+        )
+      : null
   )
 
   const showMessages = () => {
@@ -59,12 +60,12 @@ const Messages = ({ chat, messages }: any) => {
   }
 
   const [recipientSnapshot] = useCollection(
-    chat ?
-    query(
-      collection(db, 'users'),
-      where('email', '==', getRecipientEmail(chat?.users, user))
-    )
-    : null
+    chat
+      ? query(
+          collection(db, 'users'),
+          where('email', '==', getRecipientEmail(chat?.users, user))
+        )
+      : null
   )
 
   const recipient = recipientSnapshot?.docs[0]?.data()
@@ -76,14 +77,13 @@ const Messages = ({ chat, messages }: any) => {
 
     if (!input) return null
 
-    if (user && input) {
-      addDoc(collection(doc(collection(db, 'chats'), chat.id), 'messages'), {
-        user: user?.email,
-        text: input,
-        createdAt: serverTimestamp(),
-        photoURL: user?.photoURL,
-      })
-    }
+    chat ?
+    addDoc(collection(doc(collection(db, 'chats'), chat.id), 'messages'), {
+      user: user?.email,
+      text: input,
+      createdAt: serverTimestamp(),
+      photoURL: user?.photoURL,
+    }) : null
 
     setInput('')
   }
