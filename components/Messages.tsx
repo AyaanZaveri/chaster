@@ -1,17 +1,23 @@
 import {
   addDoc,
   collection,
+  doc,
   limit,
   orderBy,
   query,
   serverTimestamp,
 } from 'firebase/firestore'
 import React, { useEffect, useRef, useState } from 'react'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
+import {
+  useCollection,
+  useCollectionData,
+} from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
 import { IoMdSend } from 'react-icons/io'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../firebase'
+import getRecipientEmail from '../lib/getRecipientEmail'
+import { useRouter } from 'next/router'
 
 interface UserInfo {
   uid: string | null
@@ -23,6 +29,15 @@ const Messages = ({ chat, messages }: any) => {
   const [input, setInput] = useState('')
 
   const [user] = useAuthState(auth)
+
+  const [messagesSnapshot] = useCollection(
+    query(
+      collection(doc(collection(db, 'chats'), chat.id), 'messages'),
+      orderBy('createdAt', 'asc')
+    )
+  )
+
+  console.log(messagesSnapshot?.docs)
 
   const dummy = useRef<null | HTMLDivElement>(null)
 
@@ -39,6 +54,18 @@ const Messages = ({ chat, messages }: any) => {
   return (
     <div className="ml-80 flex w-full justify-center">
       <div className="flex w-full flex-col gap-3">
+        <div className="fixed top-0 left-0 flex w-full flex-row gap-3 border-b border-slate-200 bg-white p-5">
+          <div className="ml-80 inline-flex items-center">
+            <img
+              src="/images/avatar.png"
+              alt="avatar"
+              className="h-12 w-12 rounded-full"
+            />
+            <h1 className="text-lg font-bold text-slate-800">
+              {getRecipientEmail(chat.users, user)}
+            </h1>
+          </div>
+        </div>
         <div className="flex w-full flex-col gap-3 pb-16">
           <div className="-z-20 m-5 flex flex-col gap-3">
             {/* {messages &&
