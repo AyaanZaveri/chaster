@@ -17,7 +17,6 @@ const Index = () => {
             <div className="fixed z-20">
               <Sidebar />
             </div>
-            <Messages />
           </div>
         </div>
       ) : null}
