@@ -48,7 +48,7 @@ const Messages = ({ chat, messages }: any) => {
         user={message.data().user}
         message={{
           ...message.data(),
-          createdAt: new Date(message.data().createdAt.seconds * 1000),
+          createdAt: serverTimestamp(),
         }}
       />
     ))
@@ -96,7 +96,7 @@ const Messages = ({ chat, messages }: any) => {
             </h1>
           </div>
         </div>
-        <div className="flex w-full flex-col gap-3 pb-16">
+        <div className="mt-20 h-full w-full flex-col gap-3 pb-16">
           <div className="-z-20 m-5 flex flex-col gap-3">
             {showMessages()}
             <span ref={dummy}></span>
