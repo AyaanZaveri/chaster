@@ -82,7 +82,7 @@ const Messages = () => {
     <div className="ml-80 flex w-full justify-center">
       <div className="flex w-full flex-col gap-3">
         <div className="flex w-full flex-col gap-3 pb-16">
-          <div className="m-5 -z-20 flex flex-col gap-3">
+          <div className="-z-20 m-5 flex flex-col gap-3">
             {messages &&
               messages.map((msg) => (
                 <ChatMessage key={msg.id} message={msg} user={user} />
@@ -91,11 +91,11 @@ const Messages = () => {
           </div>
         </div>
         <form onSubmit={sendMessage}>
-          <div className="fixed bottom-0 -z-10 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
+          <div className="fixed bottom-0 left-0 -z-10 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
             <input
               value={input}
               type="text"
-              className="w-full ml-80 rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+              className="ml-80 w-full rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type a message..."
             />
