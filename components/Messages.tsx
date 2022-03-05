@@ -19,7 +19,7 @@ import { IoMdSend } from 'react-icons/io'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../firebase'
 import getRecipientEmail from '../lib/getRecipientEmail'
-import { HiOutlineEmojiHappy } from 'react-icons/hi'
+import { HiChevronLeft, HiOutlineEmojiHappy } from 'react-icons/hi'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false })
@@ -123,10 +123,11 @@ const Messages = ({ chat, messages }: any) => {
   }, [messages])
 
   return (
-    <div className="md:ml-80 flex w-full justify-center">
+    <div className="flex w-full justify-center md:ml-80">
       <div className="flex w-full flex-col gap-3">
         <div className="fixed top-0 left-0 flex w-full flex-row gap-3 border-b border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur-sm">
-          <div className="md:ml-80 inline-flex items-center gap-2">
+          <div className="inline-flex items-center gap-2 md:ml-80">
+            <a href='/'><HiChevronLeft className="h-7 w-7 text-indigo-500 md:hidden" /></a>
             {recipient?.photoURL ? (
               <img
                 className="w-8 rounded-full shadow-xl"
@@ -157,9 +158,9 @@ const Messages = ({ chat, messages }: any) => {
           >
             <Picker onEmojiClick={onEmojiClick} />
           </div>
-          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white bg-opacity-50 backdrop-blur-sm p-5">
+          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur-sm">
             <button
-              className="md:ml-80 inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+              className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100 md:ml-80"
               onClick={() => setShowEmojiPicker(!showEmojiPicker)}
               type="button"
             >

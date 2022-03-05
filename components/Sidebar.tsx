@@ -9,7 +9,7 @@ import {
 } from 'firebase/firestore'
 import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { HiOutlinePlus } from 'react-icons/hi'
+import { HiChevronLeft, HiOutlinePlus } from 'react-icons/hi'
 import { auth, db } from '../firebase'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import Chat from './Chat'
