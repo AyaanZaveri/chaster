@@ -54,7 +54,20 @@ const Messages = ({ chat, messages }: any) => {
     ))
   }
 
-  console.log(messagesSnapshot?.docs)
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+
+    if (!input) return null
+
+    addDoc(collection(doc(collection(db, 'chats'), chat.id), 'messages'), {
+      user: user?.email,
+      text: input,
+      createdAt: serverTimestamp(),
+      photoURL: user?.photoURL,
+    })
+
+    setInput('')
+  }
 
   const dummy = useRef<null | HTMLDivElement>(null)
 
@@ -85,14 +98,11 @@ const Messages = ({ chat, messages }: any) => {
         </div>
         <div className="flex w-full flex-col gap-3 pb-16">
           <div className="-z-20 m-5 flex flex-col gap-3">
-            {/* {messages &&
-              messages.map((msg) => (
-                <ChatMessage key={msg.id} message={msg} user={user} />
-              ))} */}
+            {showMessages()}
             <span ref={dummy}></span>
           </div>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
             <input
               value={input}
