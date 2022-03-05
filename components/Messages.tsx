@@ -2,6 +2,7 @@ import {
   addDoc,
   collection,
   doc,
+  getDocs,
   limit,
   orderBy,
   query,
@@ -20,6 +21,7 @@ import { auth, db } from '../firebase'
 import getRecipientEmail from '../lib/getRecipientEmail'
 import { HiOutlineEmojiHappy } from 'react-icons/hi'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false })
 
 interface UserInfo {
@@ -47,6 +49,8 @@ const Messages = ({ chat, messages }: any) => {
         )
       : null
   )
+
+  console.log(messagesSnapshot)
 
   const showMessages = () => {
     if (!messagesSnapshot) {
@@ -107,8 +111,8 @@ const Messages = ({ chat, messages }: any) => {
 
   useEffect(() => {
     if (chosenEmoji?.emoji) {
-    setInput(input + chosenEmoji?.emoji)
-    setShowEmojiPicker(false)
+      setInput(input + chosenEmoji?.emoji)
+      setShowEmojiPicker(false)
     }
   }, [chosenEmoji?.emoji])
 
@@ -139,8 +143,8 @@ const Messages = ({ chat, messages }: any) => {
             </h1>
           </div>
         </div>
-        <div className="mt-20 h-full w-full flex-col gap-3 pb-16">
-          <div className="-z-20 m-5 flex flex-col gap-3">
+        <div className="mt-20 h-full w-full flex-col gap-3">
+          <div className="-z-20 m-5 flex flex-col gap-3 pb-24">
             {showMessages()}
             <span ref={dummy}></span>
           </div>
