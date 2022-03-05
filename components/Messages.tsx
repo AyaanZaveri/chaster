@@ -19,8 +19,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../firebase'
 import getRecipientEmail from '../lib/getRecipientEmail'
 import { HiOutlineEmojiHappy } from 'react-icons/hi'
-import dynamic from 'next/dynamic';
-const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false });
+import dynamic from 'next/dynamic'
+const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false })
 
 interface UserInfo {
   uid: string | null
@@ -104,6 +104,13 @@ const Messages = ({ chat, messages }: any) => {
     }
   }
 
+  const handleEmojiChange = () => {
+    setShowEmojiPicker(!showEmojiPicker)
+    setInput(input + chosenEmoji?.emoji)
+  }
+
+  console.log(input)
+
   useEffect(() => {
     scrollToBottom()
   }, [messages])
@@ -136,13 +143,18 @@ const Messages = ({ chat, messages }: any) => {
           </div>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className={`absolute z-50 bottom-0 ml-5 mb-24`}>
+          <div
+            className={`${
+              showEmojiPicker ? 'absolute' : 'hidden'
+            } bottom-0 z-50 ml-5 mb-24`}
+          >
             <Picker onEmojiClick={onEmojiClick} />
           </div>
           <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
             <button
               className="ml-80 inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
               type="submit"
+              onClick={handleEmojiChange}
             >
               <HiOutlineEmojiHappy className="h-5 w-5" />
             </button>
@@ -153,6 +165,7 @@ const Messages = ({ chat, messages }: any) => {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type a message..."
             />
+            <span>{chosenEmoji?.emoji}</span>
             <button
               className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
               type="submit"
