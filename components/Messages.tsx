@@ -31,8 +31,6 @@ const Messages = ({ chat, messages }: any) => {
 
   const [user] = useAuthState(auth)
 
-  const router = useRouter()
-
   const [messagesSnapshot] = useCollection(
     chat
       ? query(
