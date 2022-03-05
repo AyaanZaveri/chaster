@@ -1,4 +1,11 @@
-import { collection, doc, getDoc, getDocs, orderBy, query } from 'firebase/firestore'
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  query,
+} from 'firebase/firestore'
 import React from 'react'
 import Messages from '../../components/Messages'
 import Sidebar from '../../components/Sidebar'
@@ -25,20 +32,25 @@ export async function getServerSideProps(context: any) {
 
   const ref = await doc(chatsRef, context.params.id)
 
-  console.log('ref', ref)
-
-  const messagesQ = await query(
-    collection(ref, 'messages'),
-    orderBy('createdAt', 'asc')
+  const messagesQ = await getDocs(
+    query(collection(ref, 'messages'), orderBy('createdAt', 'asc'))
   )
 
-  const messages = getDocs(messagesQ)
+  const messages = messagesQ.docs
+    .map((doc) => ({
+      ...doc.data(),
+    }))
+    .map((message) => ({
+      ...message,
+      createdAt: new Date(message.createdAt.seconds * 1000),
+    }))
 
-  console.log(messages)
+    const getChat = await getDoc(ref)
+    const chat = {
+      ...getChat.data(),
+      id: getChat.id,
+    }
 
-  return {
-    props: {},
-  }
 }
 
 export default ChatIndex
