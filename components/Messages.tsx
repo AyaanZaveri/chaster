@@ -24,8 +24,6 @@ const Messages = () => {
 
   const [user] = useAuthState(auth)
 
-  console.log(user)
-
   const dummy = useRef<null | HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -38,15 +36,9 @@ const Messages = () => {
 
   const q = query(messagesRef, orderBy('createdAt', 'asc'))
 
-  console.log(q)
-
   const [messages] = useCollectionData(q, {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
-
-  console.log(messages)
-
-  // console.log(q)
 
   useEffect(() => {
     scrollToBottom()

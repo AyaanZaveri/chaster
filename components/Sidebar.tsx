@@ -17,8 +17,6 @@ import Chat from './Chat'
 const Sidebar = () => {
   const [user] = useAuthState(auth)
 
-  console.log(user)
-
   const chatRef = collection(db, 'chats')
 
   const userChatRef = query(
@@ -27,8 +25,6 @@ const Sidebar = () => {
   )
 
   const [chatsSnapshot] = useCollection(userChatRef)
-
-  console.log(chatsSnapshot)
 
   const checkChatExists = (chatEmail: string) =>
     !!chatsSnapshot?.docs.find(
@@ -52,7 +48,7 @@ const Sidebar = () => {
     }
   }
 
-  console.log(chatsSnapshot?.docs.map((chat) => chat.data().users))
+  // console.log(chatsSnapshot?.docs.map((chat) => chat.data().users))
 
   return (
     <div>

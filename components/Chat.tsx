@@ -31,8 +31,6 @@ const Chat = ({ id, users }: ChatProps) => {
   const recipient = recipientSnapshot?.docs[0]?.data()
   const recipientEmail = getRecipientEmail(users, user)
 
-  console.log(recipient)
-
   return (
     <div>
       <div>
