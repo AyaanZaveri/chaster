@@ -37,6 +37,23 @@ const Messages = ({ chat, messages }: any) => {
     )
   )
 
+  const showMessages = () => {
+    if (!messagesSnapshot) {
+      return null
+    }
+
+    return messagesSnapshot?.docs.map((message: any) => (
+      <ChatMessage
+        key={message.id}
+        user={message.data().user}
+        message={{
+          ...message.data(),
+          createdAt: new Date(message.data().createdAt.seconds * 1000),
+        }}
+      />
+    ))
+  }
+
   console.log(messagesSnapshot?.docs)
 
   const dummy = useRef<null | HTMLDivElement>(null)

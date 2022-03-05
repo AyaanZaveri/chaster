@@ -79,7 +79,7 @@ const Sidebar = () => {
         <div className="flex justify-center">
           <div className="flex w-10/12 flex-col gap-3">
             {chatsSnapshot?.docs.map((chat) => (
-              <Chat id={chat.id} users={chat.data().users} />
+              <Chat key={chat.id} id={chat.id} users={chat.data().users} />
             ))}
           </div>
         </div>
