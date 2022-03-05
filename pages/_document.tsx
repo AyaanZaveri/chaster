@@ -21,7 +21,10 @@ export default class MyDoc extends Document {
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="description" content="Description" />
+        <link rel="apple-touch-icon" href="/icon.png"></link>
+        <meta name="theme-color" content="#fff" />
         <meta name="keywords" content="Keywords" />
         <body className="box-border bg-white dark:bg-slate-800">
           <Main />
