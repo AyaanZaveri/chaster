@@ -10,8 +10,8 @@ const ChatMessage = ({ message }: { message: any }) => {
 
   const checkUser = () => {
     return uid === user?.uid
-      ? 'bg-gradient-to-br from-indigo-500 to-violet-500 text-white border-indigo-200'
-      : 'bg-gradient-to-br from-slate-100 to-gray-100 text-slate-600 border-slate-200'
+      ? 'bg-gradient-to-br from-indigo-500 to-violet-500 text-white border-indigo-200 dark:border-indigo-600'
+      : 'bg-slate-100 text-slate-600 border-slate-200 dark:border-slate-600 dark:bg-slate-700 dark:text-white'
   }
 
   const getUnix = (sec: number) => {
