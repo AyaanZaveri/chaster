@@ -14,7 +14,7 @@ import { auth, db } from '../firebase'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import Chat from './Chat'
 
-const Sidebar = ({ userInfo }: any) => {
+const Sidebar = () => {
   const [user] = useAuthState(auth)
 
   console.log(user)
@@ -45,7 +45,7 @@ const Sidebar = ({ userInfo }: any) => {
       return
     }
 
-    if (input !== userInfo.email && !checkChatExists(input)) {
+    if (input !== user?.email && !checkChatExists(input)) {
       addDoc(chatRef, {
         users: [user?.email, input],
       })
@@ -56,12 +56,12 @@ const Sidebar = ({ userInfo }: any) => {
 
   return (
     <div>
-      <div className="flex h-screen w-80 flex-col gap-5 border-r">
+      <div className="flex h-screen bg-white w-80 flex-col gap-5 border-r">
         <div className="mt-5 flex flex-col gap-5 pl-6">
           <div className="inline-flex items-center gap-2">
             <img
               onClick={() => signOut(auth)}
-              src={`${userInfo.photoURL}`}
+              src={`${user?.photoURL}`}
               className="h-8 w-8 rounded-full shadow hover:cursor-pointer"
               alt=""
             />

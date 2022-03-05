@@ -10,9 +10,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
 import { IoMdSend } from 'react-icons/io'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth, db } from '../firebase'
 
-const Messages = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
+interface UserInfo {
+  uid: string | null
+  photoURL: string | null
+  displayName: string | null
+}
+
+const Messages = () => {
   const [input, setInput] = useState('')
+
+  const [user] = useAuthState(auth)
 
   console.log(user)
 
@@ -42,7 +52,7 @@ const Messages = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
     }
   })
 
-  const { uid, photoURL, displayName } = user
+  const { uid, photoURL, displayName }: UserInfo = user!
 
   // console.log(q)
 
@@ -72,7 +82,7 @@ const Messages = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
     <div className="ml-80 flex w-full justify-center">
       <div className="flex w-full flex-col gap-3">
         <div className="flex w-full flex-col gap-3 pb-16">
-          <div className="m-5 flex flex-col gap-3">
+          <div className="m-5 -z-20 flex flex-col gap-3">
             {messages &&
               messages.map((msg) => (
                 <ChatMessage key={msg.id} message={msg} user={user} />
@@ -81,16 +91,16 @@ const Messages = ({ user, db, auth }: { user: any; db: any; auth: any }) => {
           </div>
         </div>
         <form onSubmit={sendMessage}>
-          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
+          <div className="fixed bottom-0 -z-10 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
             <input
               value={input}
               type="text"
-              className="w-full rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+              className="w-full ml-80 rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type a message..."
             />
             <button
-              className="inline-flex place-items-center rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+              className="inline-flex w-1/12 items-center justify-center rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
               type="submit"
             >
               Send

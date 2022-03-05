@@ -21,17 +21,11 @@ import Messages from '../components/Messages'
 import Sidebar from '../components/Sidebar'
 import { auth, db, provider } from '../firebase'
 import Login from './login'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 const Index = () => {
-  const [user, setUser] = useState<any>(null)
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user)
-    }
-  })
-
-  console.log(user)
+  const [user] = useAuthState(auth)
 
   return (
     <div>
@@ -39,9 +33,9 @@ const Index = () => {
         <div>
           <div className="flex flex-row">
             <div className="fixed">
-              <Sidebar userInfo={user} />
+              <Sidebar />
             </div>
-            <Messages user={user} db={db} auth={auth} />
+            <Messages />
           </div>
         </div>
       ) : null}
