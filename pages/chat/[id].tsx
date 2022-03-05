@@ -61,8 +61,6 @@ export async function getServerSideProps(context: any) {
     id: getChat.id,
   }
 
-  console.log(chat, messages)
-
   return {
     props: {
       chat: chat,

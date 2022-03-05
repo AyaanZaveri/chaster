@@ -48,7 +48,6 @@ const Messages = ({ chat, messages }: any) => {
     return messagesSnapshot?.docs.map((message: any) => (
       <ChatMessage
         key={message.id}
-        user={message.data().user}
         message={{
           ...message.data(),
           createdAt: serverTimestamp(),
@@ -75,13 +74,16 @@ const Messages = ({ chat, messages }: any) => {
 
     if (!input) return null
 
-    chat ?
-    addDoc(collection(doc(collection(db, 'chats'), chat.id), 'messages'), {
-      user: user?.email,
-      text: input,
-      createdAt: serverTimestamp(),
-      photoURL: user?.photoURL,
-    }) : null
+    chat
+      ? addDoc(collection(doc(collection(db, 'chats'), chat.id), 'messages'), {
+          user: user?.email,
+          text: input,
+          createdAt: serverTimestamp(),
+          photoURL: user?.photoURL,
+          displayName: user?.displayName,
+          uid: user?.uid,
+        })
+      : null
 
     setInput('')
   }

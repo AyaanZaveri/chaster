@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
 import { DateTime } from 'luxon'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../firebase'
 
-const ChatMessage = ({ message, user }: { message: any; user: any }) => {
-  const { text, uid, createdAt, photoURL } = message
+const ChatMessage = ({ message }: { message: any }) => {
+  const { text, uid, createdAt, photoURL, displayName } = message
 
-  console.log(user)
+  const [user] = useAuthState(auth)
 
   const checkUser = () => {
-    return uid === user.uid
+    return uid === user?.uid
       ? 'bg-gradient-to-br from-indigo-500 to-violet-500 text-white border-indigo-200'
       : 'bg-slate-100 text-slate-600 border-slate-200'
   }
@@ -19,7 +21,7 @@ const ChatMessage = ({ message, user }: { message: any; user: any }) => {
   return (
     <div
       className={`grid grid-flow-col ${
-        uid === user.uid ? 'place-items-end' : 'place-items-start'
+        uid === user?.uid ? 'place-items-end' : 'place-items-start'
       } gap-1`}
     >
       {/* <img
@@ -28,7 +30,7 @@ const ChatMessage = ({ message, user }: { message: any; user: any }) => {
       /> */}
       <div
         className={`grid ${
-          uid === user.uid ? 'place-items-end' : 'place-items-start'
+          uid === user?.uid ? 'place-items-end' : 'place-items-start'
         } w-1/2 items-center`}
       >
         <div
