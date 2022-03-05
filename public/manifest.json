@@ -1,0 +1,10 @@
+{
+    "theme_color" : "#ffffff",
+    "background_color" : "#ffffff",
+    "display" : "standalone",
+    "scope" : "/",
+    "start_url" : "/",
+    "name" : "Chaster",
+    "short_name" : "Chaster",
+    "description" : "Messaging with speed."
+    }
