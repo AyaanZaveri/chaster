@@ -9,21 +9,28 @@ import {
 import React from 'react'
 import Messages from '../../components/Messages'
 import Sidebar from '../../components/Sidebar'
-import { db } from '../../firebase'
+import { auth, db } from '../../firebase'
 import { get } from 'firebase/database'
+import Head from 'next/head'
+import getRecipientEmail from '../../lib/getRecipientEmail'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
-const ChatIndex = ({messages, chat} : {
-  messages: string[],
-  chat: any
-}) => {
+const ChatIndex = ({ messages, chat }: { messages: string[]; chat: any }) => {
+
+  const [user] = useAuthState(auth)
+  
+  console.log(messages)
   return (
     <div>
+      <Head>
+        <title>Chat - {getRecipientEmail(chat.users, user)}</title>
+      </Head>
       <div>
         <div className="flex flex-row">
           <div className="fixed z-20">
             <Sidebar />
           </div>
-          <Messages />
+          <Messages chat={chat} messages={messages} />
         </div>
       </div>
     </div>
@@ -53,6 +60,8 @@ export async function getServerSideProps(context: any) {
     ...getChat.data(),
     id: getChat.id,
   }
+
+  console.log(chat, messages)
 
   return {
     props: {

@@ -19,7 +19,7 @@ interface UserInfo {
   displayName: string | null
 }
 
-const Messages = () => {
+const Messages = ({ chat, messages }: any) => {
   const [input, setInput] = useState('')
 
   const [user] = useAuthState(auth)
@@ -32,14 +32,6 @@ const Messages = () => {
     }
   }
 
-  const messagesRef = collection(db, 'messages')
-
-  const q = query(messagesRef, orderBy('createdAt', 'asc'))
-
-  const [messages] = useCollectionData(q, {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  })
-
   useEffect(() => {
     scrollToBottom()
   }, [messages])
@@ -49,10 +41,10 @@ const Messages = () => {
       <div className="flex w-full flex-col gap-3">
         <div className="flex w-full flex-col gap-3 pb-16">
           <div className="-z-20 m-5 flex flex-col gap-3">
-            {messages &&
+            {/* {messages &&
               messages.map((msg) => (
                 <ChatMessage key={msg.id} message={msg} user={user} />
-              ))}
+              ))} */}
             <span ref={dummy}></span>
           </div>
         </div>
