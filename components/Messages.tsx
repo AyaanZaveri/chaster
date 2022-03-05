@@ -125,20 +125,20 @@ const Messages = ({ chat, messages }: any) => {
   return (
     <div className="ml-80 flex w-full justify-center">
       <div className="flex w-full flex-col gap-3">
-        <div className="fixed top-0 left-0 flex w-full flex-row gap-3 border-b border-slate-200 bg-white p-5">
+        <div className="fixed top-0 left-0 flex w-full flex-row gap-3 border-b border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur-sm">
           <div className="ml-80 inline-flex items-center gap-2">
             {recipient?.photoURL ? (
               <img
-                className="w-8 rounded-full shadow-sm"
+                className="w-8 rounded-full shadow-xl"
                 src={`${recipient?.photoURL}`}
                 alt=""
               />
             ) : (
-              <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-indigo-200 bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-sm">
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-indigo-200 bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-xl">
                 {getRecipientEmail(chat?.users, user)[0].toUpperCase()}
               </div>
             )}
-            <h1 className="text-lg font-bold text-slate-800">
+            <h1 className="text-lg font-bold text-slate-800 drop-shadow-md">
               {getRecipientEmail(chat?.users, user)}
             </h1>
           </div>
@@ -157,7 +157,7 @@ const Messages = ({ chat, messages }: any) => {
           >
             <Picker onEmojiClick={onEmojiClick} />
           </div>
-          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
+          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur-sm p-5">
             <button
               className="ml-80 inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
               onClick={() => setShowEmojiPicker(!showEmojiPicker)}
