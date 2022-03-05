@@ -30,7 +30,7 @@ interface UserInfo {
 
 const Messages = ({ chat, messages }: any) => {
   const [input, setInput] = useState('')
-  const [chosenEmoji, setChosenEmoji] = useState(null)
+  const [chosenEmoji, setChosenEmoji] = useState<any>(null)
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
 
   const onEmojiClick = (event: any, emojiObject: any) => {
@@ -94,6 +94,7 @@ const Messages = ({ chat, messages }: any) => {
       : null
 
     setInput('')
+    scrollToBottom()
   }
 
   const dummy = useRef<null | HTMLDivElement>(null)
@@ -104,10 +105,12 @@ const Messages = ({ chat, messages }: any) => {
     }
   }
 
-  const handleEmojiChange = () => {
-    setShowEmojiPicker(!showEmojiPicker)
+  useEffect(() => {
+    if (chosenEmoji?.emoji) {
     setInput(input + chosenEmoji?.emoji)
-  }
+    setShowEmojiPicker(false)
+    }
+  }, [chosenEmoji?.emoji])
 
   console.log(input)
 
@@ -153,8 +156,8 @@ const Messages = ({ chat, messages }: any) => {
           <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
             <button
               className="ml-80 inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
-              type="submit"
-              onClick={handleEmojiChange}
+              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+              type="button"
             >
               <HiOutlineEmojiHappy className="h-5 w-5" />
             </button>
