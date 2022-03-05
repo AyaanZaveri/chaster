@@ -12,7 +12,10 @@ import Sidebar from '../../components/Sidebar'
 import { db } from '../../firebase'
 import { get } from 'firebase/database'
 
-const ChatIndex = () => {
+const ChatIndex = ({messages, chat} : {
+  messages: string[],
+  chat: any
+}) => {
   return (
     <div>
       <div>
