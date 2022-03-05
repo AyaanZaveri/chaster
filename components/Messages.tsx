@@ -6,6 +6,7 @@ import {
   orderBy,
   query,
   serverTimestamp,
+  where,
 } from 'firebase/firestore'
 import React, { useEffect, useRef, useState } from 'react'
 import {
@@ -54,6 +55,17 @@ const Messages = ({ chat, messages }: any) => {
     ))
   }
 
+  const [recipientSnapshot] = useCollection(
+    query(
+      collection(db, 'users'),
+      where('email', '==', getRecipientEmail(chat.users, user))
+    )
+  )
+
+  const recipient = recipientSnapshot?.docs[0]?.data()
+
+  console.log(recipient)
+
   const handleSubmit = (e: any) => {
     e.preventDefault()
 
@@ -85,12 +97,18 @@ const Messages = ({ chat, messages }: any) => {
     <div className="ml-80 flex w-full justify-center">
       <div className="flex w-full flex-col gap-3">
         <div className="fixed top-0 left-0 flex w-full flex-row gap-3 border-b border-slate-200 bg-white p-5">
-          <div className="ml-80 inline-flex items-center">
-            <img
-              src="/images/avatar.png"
-              alt="avatar"
-              className="h-12 w-12 rounded-full"
-            />
+          <div className="ml-80 inline-flex items-center gap-2">
+            {recipient?.photoURL ? (
+              <img
+                className="w-8 rounded-full shadow-sm"
+                src={`${recipient?.photoURL}`}
+                alt=""
+              />
+            ) : (
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-indigo-200 bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-sm">
+                {getRecipientEmail(chat.users, user)[0].toUpperCase()}
+              </div>
+            )}
             <h1 className="text-lg font-bold text-slate-800">
               {getRecipientEmail(chat.users, user)}
             </h1>

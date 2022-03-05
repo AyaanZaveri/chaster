@@ -4,6 +4,8 @@ import { DateTime } from 'luxon'
 const ChatMessage = ({ message, user }: { message: any; user: any }) => {
   const { text, uid, createdAt, photoURL } = message
 
+  console.log(user)
+
   const checkUser = () => {
     return uid === user.uid
       ? 'bg-gradient-to-br from-indigo-500 to-violet-500 text-white border-indigo-200'
