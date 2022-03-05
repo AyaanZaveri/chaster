@@ -157,7 +157,7 @@ const Messages = ({ chat, messages }: any) => {
           >
             <Picker onEmojiClick={onEmojiClick} />
           </div>
-          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white bg-opacity-50 p-5 backdrop-blur-sm p-5">
+          <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white bg-opacity-50 backdrop-blur-sm p-5">
             <button
               className="md:ml-80 inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
               onClick={() => setShowEmojiPicker(!showEmojiPicker)}
