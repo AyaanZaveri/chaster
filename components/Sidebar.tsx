@@ -56,7 +56,7 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="flex h-screen bg-white w-80 flex-col gap-5 border-r">
+      <div className="flex h-screen w-80 flex-col gap-5 border-r bg-white">
         <div className="mt-5 flex flex-col gap-5 pl-6">
           <div className="inline-flex items-center gap-2">
             <img

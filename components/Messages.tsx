@@ -46,37 +46,11 @@ const Messages = () => {
 
   console.log(messages)
 
-  setInterval(() => {
-    if (document.body.scrollTop < 0) {
-      console.log('LA')
-    }
-  })
-
-  const { uid, photoURL, displayName }: UserInfo = user!
-
   // console.log(q)
 
   useEffect(() => {
     scrollToBottom()
   }, [messages])
-
-  const sendMessage = async (e: any) => {
-    e.preventDefault()
-
-    if (input.trim()) {
-      await addDoc(messagesRef, {
-        text: input,
-        createdAt: serverTimestamp(),
-        uid,
-        photoURL,
-        displayName,
-      })
-
-      setInput('')
-
-      scrollToBottom()
-    }
-  }
 
   return (
     <div className="ml-80 flex w-full justify-center">
@@ -90,7 +64,7 @@ const Messages = () => {
             <span ref={dummy}></span>
           </div>
         </div>
-        <form onSubmit={sendMessage}>
+        <form>
           <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
             <input
               value={input}
