@@ -61,7 +61,7 @@ const Sidebar = ({ userInfo }: any) => {
           <div className="inline-flex items-center gap-2">
             <img
               onClick={() => signOut(auth)}
-              src={userInfo.photoURL}
+              src={`${userInfo.photoURL}`}
               className="h-8 w-8 rounded-full shadow hover:cursor-pointer"
               alt=""
             />
