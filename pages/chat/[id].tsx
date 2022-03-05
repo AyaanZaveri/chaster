@@ -45,12 +45,18 @@ export async function getServerSideProps(context: any) {
       createdAt: new Date(message.createdAt.seconds * 1000),
     }))
 
-    const getChat = await getDoc(ref)
-    const chat = {
-      ...getChat.data(),
-      id: getChat.id,
-    }
+  const getChat = await getDoc(ref)
+  const chat = {
+    ...getChat.data(),
+    id: getChat.id,
+  }
 
+  return {
+    props: {
+      chat: chat,
+      messages: JSON.stringify(messages),
+    },
+  }
 }
 
 export default ChatIndex
