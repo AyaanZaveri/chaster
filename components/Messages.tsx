@@ -18,7 +18,7 @@ import { IoMdSend } from 'react-icons/io'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../firebase'
 import getRecipientEmail from '../lib/getRecipientEmail'
-import { useRouter } from 'next/router'
+import { HiOutlineEmojiHappy } from 'react-icons/hi'
 
 interface UserInfo {
   uid: string | null
@@ -129,15 +129,21 @@ const Messages = ({ chat, messages }: any) => {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="fixed bottom-0 left-0 flex w-full flex-row gap-3 border-t border-slate-200 bg-white p-5">
+            <button
+              className="ml-80 inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+              type="submit"
+            >
+              <HiOutlineEmojiHappy className="h-5 w-5" />
+            </button>
             <input
               value={input}
               type="text"
-              className="ml-80 w-full rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+              className="w-full rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type a message..."
             />
             <button
-              className="inline-flex w-1/12 items-center justify-center rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
+              className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-indigo-100"
               type="submit"
             >
               Send
