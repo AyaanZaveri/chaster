@@ -5,4 +5,4 @@
 The authentication is done with [Google Sign-In](https://firebase.google.com/docs/auth/web/google-signin).
 
 ## How it was made
-[**Chaster**](https://chaster.vercel.app/) was made with Next.js, TypeScript, and TailwindCSS
+[**Chaster**](https://chaster.vercel.app/) was made with Next.js, TypeScript, and TailwindCSS.
